@@ -26,6 +26,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            touch-action: manipulation; /* ФИКС ЛАГОВ НА ТЕЛЕФОНЕ */
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -58,166 +59,40 @@
 
         main { position: relative; z-index: 999; }
 
-        .hero {
-            height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            position: relative; overflow: hidden;
-            background: linear-gradient(135deg, rgba(255, 153, 204, 0.1), rgba(255, 230, 240, 0.2));
-        }
-
-        .hero-content {
-            text-align: center; padding: 30px; border-radius: 20px;
-            backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); max-width: 800px;
-            animation: fadeIn 1.5s forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 20px;
-            color: var(--primary-color);
-            position: relative; display: inline-block;
-        }
-
-        .hero h1::after {
-            content: ''; position: absolute; width: 100px; height: 3px;
-            background-color: var(--accent-color); bottom: -10px; left: 50%;
-            transform: translateX(-50%);
-        }
-
+        /* ОСТАЛЬНЫЕ СТИЛИ БЕЗ ИЗМЕНЕНИЙ */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(255, 153, 204, 0.1), rgba(255, 230, 240, 0.2)); }
+        .hero-content { text-align: center; padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); max-width: 800px; animation: fadeIn 1.5s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 20px; color: var(--primary-color); position: relative; display: inline-block; }
+        .hero h1::after { content: ''; position: absolute; width: 100px; height: 3px; background-color: var(--accent-color); bottom: -10px; left: 50%; transform: translateX(-50%); }
         .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-        .btn {
-            display: inline-block; padding: 15px 40px; background-color: var(--primary-color);
-            color: white; text-decoration: none; border-radius: 50px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(255, 153, 204, 0.4); font-size: 1.1rem;
-            border: none; cursor: pointer; touch-action: manipulation;
-        }
-
-        .btn:hover, .btn:active { 
-            background-color: var(--secondary-color); 
-            transform: translateY(-5px) scale(1.05); 
-            box-shadow: 0 12px 30px rgba(255, 153, 204, 0.6); 
-        }
-
+        .btn { display: inline-block; padding: 15px 40px; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(255, 153, 204, 0.4); font-size: 1.1rem; border: none; cursor: pointer; touch-action: manipulation; }
+        .btn:hover, .btn:active { background-color: var(--secondary-color); transform: translateY(-5px) scale(1.05); box-shadow: 0 12px 30px rgba(255, 153, 204, 0.6); }
         .message-section { padding: 100px 0; }
-        .message-card {
-            background-color: white; border-radius: 20px; padding: 50px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        .message-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 20px 20px 0 0;
-        }
-        .message-title {
-            font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px;
-            color: var(--primary-color);
-            text-align: center;
-        }
+        .message-card { background-color: white; border-radius: 20px; padding: 50px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); position: relative; }
+        .message-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); border-radius: 20px 20px 0 0; }
+        .message-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; color: var(--primary-color); text-align: center; }
         .message-content { font-size: 1.1rem; line-height: 1.8; text-align: center; margin-bottom: 30px; }
-        .message-signature {
-            text-align: right; font-family: 'Playfair Display', serif; font-style: italic;
-            font-size: 1.5rem; color: var(--primary-color);
-        }
-
-        .gallery-section { 
-            padding: 80px 0; 
-            background: linear-gradient(135deg, rgba(255, 153, 204, 0.05), rgba(255, 230, 240, 0.1));
-        }
-        .gallery-title {
-            font-family: 'Playfair Display', serif; font-size: 2.8rem; text-align: center;
-            margin-bottom: 60px; color: var(--primary-color);
-        }
-        .gallery-grid {
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            grid-gap: 25px;
-        }
-        .gallery-item {
-            position: relative; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            height: 280px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); 
-            transition: all 0.4s ease;
-            cursor: pointer;
-            background: transparent;
-            z-index: 1000;
-            touch-action: manipulation;
-        }
-        .gallery-item:hover:not(.active), .gallery-item:active:not(.active) { 
-            transform: translateY(-10px); 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
-        }
-        .gallery-item.active {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            z-index: 1001;
-        }
-        .gallery-image {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: blur(25px) brightness(0.7) saturate(0.6);
-            transition: filter 0.4s ease;
-            display: block;
-        }
-        .gallery-item.active .gallery-image { 
-            filter: none; 
-        }
-        .gallery-caption {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent); 
-            color: white; font-weight: 600; opacity: 0; 
-            transition: all 0.4s ease; text-align: center; transform: translateY(20px);
-            z-index: 1002;
-        }
-        .gallery-item.active .gallery-caption { 
-            opacity: 1; transform: translateY(0); 
-        }
-
-        .music-section {
-            padding: 100px 0; background: linear-gradient(135deg, rgba(255, 153, 204, 0.15), rgba(255, 230, 240, 0.25));
-            text-align: center;
-        }
-        .music-title {
-            font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 30px;
-            color: var(--primary-color);
-        }
-        .music-player {
-            max-width: 500px; margin: 0 auto; background-color: white; 
-            border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
+        .message-signature { text-align: right; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: var(--primary-color); }
+        .gallery-section { padding: 80px 0; background: linear-gradient(135deg, rgba(255, 153, 204, 0.05), rgba(255, 230, 240, 0.1)); }
+        .gallery-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; text-align: center; margin-bottom: 60px; color: var(--primary-color); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); grid-gap: 25px; }
+        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; height: 280px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; cursor: pointer; background: transparent; z-index: 1000; touch-action: manipulation; will-change: transform; }
+        .gallery-item:hover:not(.active), .gallery-item:active:not(.active) { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); }
+        .gallery-item.active { transform: translateY(-15px) scale(1.02); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25); z-index: 1001; }
+        .gallery-image { width: 100%; height: 100%; object-fit: cover; filter: blur(25px) brightness(0.7) saturate(0.6); transition: filter 0.4s ease; display: block; }
+        .gallery-item.active .gallery-image { filter: none; }
+        .gallery-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent); color: white; font-weight: 600; opacity: 0; transition: all 0.4s ease; text-align: center; transform: translateY(20px); z-index: 1002; }
+        .gallery-item.active .gallery-caption { opacity: 1; transform: translateY(0); }
+        .music-section { padding: 100px 0; background: linear-gradient(135deg, rgba(255, 153, 204, 0.15), rgba(255, 230, 240, 0.25)); text-align: center; }
+        .music-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 30px; color: var(--primary-color); }
+        .music-player { max-width: 500px; margin: 0 auto; background-color: white; border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
         .music-controls { display: flex; justify-content: center; align-items: center; margin-top: 20px; }
-        .play-btn {
-            width: 70px; height: 70px; border-radius: 50%; background-color: var(--primary-color);
-            color: white; display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(255, 153, 204, 0.4); border: none;
-            touch-action: manipulation;
-        }
-        .play-btn:hover, .play-btn:active, .play-btn.active { 
-            background-color: var(--secondary-color); transform: scale(1.1); 
-        }
-        .music-caption { 
-            margin-top: 25px; font-style: italic; color: var(--dark-color); 
-            font-size: 1.2rem;
-        }
-
-        footer {
-            padding: 60px 0; 
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white; 
-            text-align: center;
-        }
-        .footer-message { 
-            font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; 
-        }
+        .play-btn { width: 70px; height: 70px; border-radius: 50%; background-color: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(255, 153, 204, 0.4); border: none; touch-action: manipulation; }
+        .play-btn:hover, .play-btn:active, .play-btn.active { background-color: var(--secondary-color); transform: scale(1.1); }
+        .music-caption { margin-top: 25px; font-style: italic; color: var(--dark-color); font-size: 1.2rem; }
+        footer { padding: 60px 0; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; text-align: center; }
+        .footer-message { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; }
 
         @media (max-width: 768px) {
             .hero { height: 90vh; padding: 20px; }
@@ -307,10 +182,8 @@
             <div class="container">
                 <h2 class="music-title">Для тебя</h2>
                 <div class="music-player">
-                    <!-- love1.mp3 для основной музыки -->
-                    <audio id="myAudio" src="love1.mp3" preload="auto"></audio>
-                    <!-- love2.mp3 для кнопки ДА! -->
-                    <audio id="yesAudio" src="love2.mp3" preload="auto"></audio>
+                    <audio id="myAudio" src="love1.mp3" preload="metadata"></audio>
+                    <audio id="yesAudio" src="love2.mp3" preload="metadata"></audio>
                     <div class="music-controls">
                         <button class="play-btn" id="playButton">
                             <i class="fas fa-play" id="playIcon"></i>
@@ -330,90 +203,108 @@
     </main>
 
     <script>
+        // ГЛОБАЛЬНЫЙ ФЛАГ - ПОЛЬЗОВАТЕЛЬ ВЗАИМОДЕЙСТВОВАЛ
+        let userInteracted = false;
+
         function scrollToBottom() {
-            // Звук love2.mp3 при нажатии ДА!
-            const yesAudio = document.getElementById('yesAudio');
-            yesAudio.currentTime = 0; // Сброс до начала
-            yesAudio.play().catch(e => console.log('Автопроигрывание заблокировано'));
+            userInteracted = true; // Разрешаем звук после первого касания
             
-            // Скролл до низа
+            // Звук love2.mp3 ТОЛЬКО после взаимодействия
+            const yesAudio = document.getElementById('yesAudio');
+            if (userInteracted) {
+                yesAudio.currentTime = 0;
+                yesAudio.play().catch(() => {}); // Тихо игнорируем ошибки
+            }
+            
+            // Плавный скролл
             window.scrollTo({
                 top: document.body.scrollHeight,
                 left: 0,
                 behavior: 'smooth'
             });
-            setTimeout(() => {
-                window.scrollTo(0, document.body.scrollHeight);
-            }, 100);
         }
 
         function createHeartsBatch() {
             const container = document.getElementById('heartsdiv');
             const symbols = ['💖', '💕', '💗', '💓', '💞', '❤️'];
-            const batchSize = 4;
+            const batchSize = 2; // МЕНЬШЕ СЕРДЕЧКЕК ДЛЯ МОБИЛЬНЫХ
             
             for (let i = 0; i < batchSize; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
-                heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heart.innerHTML = symbols[Math.random() * symbols.length | 0];
+                heart.style.fontSize = (Math.random() * 10 + 10) + 'px'; // МЕНЬШЕ НА МОБИЛЬНЫХ
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.animationDuration = (Math.random() * 10 + 15) + 's';
                 container.appendChild(heart);
                 
-                setTimeout(() => {
-                    if (heart.parentNode) heart.remove();
-                }, 30000);
+                setTimeout(() => heart.remove(), 25000);
             }
         }
 
         function startHearts() {
             createHeartsBatch();
-            setInterval(createHeartsBatch, 1500);
+            setInterval(createHeartsBatch, 2000); // РЕЖЕ НА МОБИЛЬНЫХ
         }
 
         let isPlaying = false;
         function toggleMusic() {
+            userInteracted = true; // Разрешаем звук после касания
+            
             const audio = document.getElementById('myAudio');
             const btn = document.getElementById('playButton');
             const icon = document.getElementById('playIcon');
             
             if (isPlaying) {
-                audio.pause(); 
-                icon.className = 'fas fa-play'; 
+                audio.pause();
+                icon.className = 'fas fa-play';
                 btn.classList.remove('active');
                 isPlaying = false;
             } else {
-                audio.play(); 
-                icon.className = 'fas fa-pause'; 
+                audio.currentTime = 0;
+                audio.play().catch(() => {}); // Тихо игнорируем
+                icon.className = 'fas fa-pause';
                 btn.classList.add('active');
                 isPlaying = true;
             }
         }
 
+        // ОПТИМИЗИРОВАННАЯ ИНИЦИАЛИЗАЦИЯ ДЛЯ МОБИЛЬНЫХ
         document.addEventListener('DOMContentLoaded', function() {
-            // КНОПКА ДА! - звук + скролл
-            document.getElementById('scrollBtn').addEventListener('click', scrollToBottom);
-            document.getElementById('scrollBtn').addEventListener('touchstart', scrollToBottom);
+            // КНОПКА ДА!
+            const scrollBtn = document.getElementById('scrollBtn');
+            scrollBtn.addEventListener('click', scrollToBottom);
+            scrollBtn.addEventListener('touchend', scrollToBottom); // touchend вместо touchstart
             
-            // Галерея
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.addEventListener('click', function(e) {
+            // ГАЛЕРЕЯ - ОПТИМИЗИРОВАННАЯ
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                const toggleGallery = (e) => {
+                    e.preventDefault();
                     e.stopPropagation();
-                    this.classList.toggle('active');
-                });
-                item.addEventListener('touchstart', function(e) {
-                    e.stopPropagation();
-                    this.classList.toggle('active');
-                });
+                    item.classList.toggle('active');
+                };
+                
+                item.addEventListener('click', toggleGallery);
+                item.addEventListener('touchend', toggleGallery); // touchend для стабильности
             });
             
-            // Музыка love1.mp3
-            document.getElementById('playButton').addEventListener('click', toggleMusic);
-            document.getElementById('playButton').addEventListener('touchstart', toggleMusic);
+            // МУЗЫКА - ФИКС ДЛЯ МОБИЛЬНЫХ
+            const playButton = document.getElementById('playButton');
+            playButton.addEventListener('click', toggleMusic);
+            playButton.addEventListener('touchend', toggleMusic);
             
             startHearts();
         });
+
+        // ПЕРВЫЙ КЛИК РАЗРЕШАЕТ ВСЕ ЗВУКИ
+        document.addEventListener('click', () => {
+            userInteracted = true;
+        }, { once: true });
+        
+        document.addEventListener('touchstart', () => {
+            userInteracted = true;
+        }, { once: true });
     </script>
 </body>
 </html>
+
