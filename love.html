@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ты будешь моей валентинкой?</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #ff99cc;
+            --secondary-color: #ffb3d9;
+            --accent-color: #ffe6f0;
+            --text-color: #333333;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: #fcf7ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        #heartsdiv {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff69b4;
+            filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5));
+            animation: float 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        main { position: relative; z-index: 999; }
+
+        .hero {
+            height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 153, 204, 0.1), rgba(255, 230, 240, 0.2));
+        }
+
+        .hero-content {
+            text-align: center; padding: 30px; border-radius: 20px;
+            backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); max-width: 800px;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative; display: inline-block;
+        }
+
+        .hero h1::after {
+            content: ''; position: absolute; width: 100px; height: 3px;
+            background-color: var(--accent-color); bottom: -10px; left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .btn {
+            display: inline-block; padding: 15px 40px; background-color: var(--primary-color);
+            color: white; text-decoration: none; border-radius: 50px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 153, 204, 0.4); font-size: 1.1rem;
+            border: none; cursor: pointer; touch-action: manipulation;
+        }
+
+        .btn:hover, .btn:active { 
+            background-color: var(--secondary-color); 
+            transform: translateY(-5px) scale(1.05); 
+            box-shadow: 0 12px 30px rgba(255, 153, 204, 0.6); 
+        }
+
+        .message-section { padding: 100px 0; }
+        .message-card {
+            background-color: white; border-radius: 20px; padding: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .message-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px 20px 0 0;
+        }
+        .message-title {
+            font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        .message-content { font-size: 1.1rem; line-height: 1.8; text-align: center; margin-bottom: 30px; }
+        .message-signature {
+            text-align: right; font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: 1.5rem; color: var(--primary-color);
+        }
+
+        .gallery-section { 
+            padding: 80px 0; 
+            background: linear-gradient(135deg, rgba(255, 153, 204, 0.05), rgba(255, 230, 240, 0.1));
+        }
+        .gallery-title {
+            font-family: 'Playfair Display', serif; font-size: 2.8rem; text-align: center;
+            margin-bottom: 60px; color: var(--primary-color);
+        }
+        .gallery-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            grid-gap: 25px;
+        }
+        .gallery-item {
+            position: relative; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            height: 280px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); 
+            transition: all 0.4s ease;
+            cursor: pointer;
+            background: transparent;
+            z-index: 1000;
+            touch-action: manipulation;
+        }
+        .gallery-item:hover:not(.active), .gallery-item:active:not(.active) { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
+        }
+        .gallery-item.active {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            z-index: 1001;
+        }
+        .gallery-image {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: blur(25px) brightness(0.7) saturate(0.6);
+            transition: filter 0.4s ease;
+            display: block;
+        }
+        .gallery-item.active .gallery-image { 
+            filter: none; 
+        }
+        .gallery-caption {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent); 
+            color: white; font-weight: 600; opacity: 0; 
+            transition: all 0.4s ease; text-align: center; transform: translateY(20px);
+            z-index: 1002;
+        }
+        .gallery-item.active .gallery-caption { 
+            opacity: 1; transform: translateY(0); 
+        }
+
+        .music-section {
+            padding: 100px 0; background: linear-gradient(135deg, rgba(255, 153, 204, 0.15), rgba(255, 230, 240, 0.25));
+            text-align: center;
+        }
+        .music-title {
+            font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        .music-player {
+            max-width: 500px; margin: 0 auto; background-color: white; 
+            border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .music-controls { display: flex; justify-content: center; align-items: center; margin-top: 20px; }
+        .play-btn {
+            width: 70px; height: 70px; border-radius: 50%; background-color: var(--primary-color);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 153, 204, 0.4); border: none;
+            touch-action: manipulation;
+        }
+        .play-btn:hover, .play-btn:active, .play-btn.active { 
+            background-color: var(--secondary-color); transform: scale(1.1); 
+        }
+        .music-caption { 
+            margin-top: 25px; font-style: italic; color: var(--dark-color); 
+            font-size: 1.2rem;
+        }
+
+        footer {
+            padding: 60px 0; 
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; 
+            text-align: center;
+        }
+        .footer-message { 
+            font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; 
+        }
+
+        @media (max-width: 768px) {
+            .hero { height: 90vh; padding: 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .btn { padding: 12px 30px; font-size: 1rem; }
+            .message-card { padding: 30px 20px; margin: 0 10px; }
+            .message-title { font-size: 2rem; }
+            .message-signature { font-size: 1.3rem; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); grid-gap: 20px; padding: 0 10px; }
+            .gallery-item { height: 220px; }
+            .gallery-image { filter: blur(30px) brightness(0.6) saturate(0.5); }
+            .music-section { padding: 60px 0; }
+            .music-title { font-size: 2.2rem; }
+            .music-player { padding: 30px 20px; margin: 0 10px; }
+            footer { padding: 40px 0; }
+            .footer-message { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item { height: 200px; }
+            .gallery-image { filter: blur(35px) brightness(0.5) saturate(0.4); }
+        }
+    </style>
+</head>
+<body>
+    <div id="heartsdiv"></div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Ты будешь моей валентинкой?</h1>
+                <p>В День святого Валентина я хочу признаться: Арина, ты — самое яркое и тёплое в моей жизни. С твоей улыбкой каждый день как праздник любви. Будь моей навсегда! 💕</p>
+                <button class="btn" id="scrollBtn">ДА!</button>
+            </div>
+        </section>
+
+        <section class="message-section" id="message">
+            <div class="container">
+                <div class="message-card">
+                    <h2 class="message-title">С Днём святого Валентина!</h2>
+                    <div class="message-content">
+                        <p>Моя любимая, в этот романтический день я хочу сказать, как сильно люблю тебя. Ты делаешь мою жизнь полной счастья и нежности.</p>
+                        <p>Пусть наша любовь расцветает, как весенние цветы, и длится вечно. Ты — моя судьба и моё сердце.</p>
+                        <p>С любовью, навсегда твой Данил</p>
+                    </div>
+                    <div class="message-signature">Твой Данил 💝</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <div class="container">
+                <h2 class="gallery-title">Наши моменты</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="1.png" class="gallery-image" alt="Фото 1">
+                        <div class="gallery-caption">Собака с яблоком</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="2.png" class="gallery-image" alt="Фото 2">
+                        <div class="gallery-caption">Наша первая поездка в Москву</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3.png" class="gallery-image" alt="Фото 3">
+                        <div class="gallery-caption">Наша первая поездка в лагерь</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4.png" class="gallery-image" alt="Фото 4">
+                        <div class="gallery-caption">Тут я посвятил тебе стих</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="5.png" class="gallery-image" alt="Фото 5">
+                        <div class="gallery-caption">Наши первые объятия</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="6.png" class="gallery-image" alt="Фото 6">
+                        <div class="gallery-caption">Наше первое совместное фото</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="music-section">
+            <div class="container">
+                <h2 class="music-title">Для тебя</h2>
+                <div class="music-player">
+                    <!-- love1.mp3 для основной музыки -->
+                    <audio id="myAudio" src="love1.mp3" preload="auto"></audio>
+                    <!-- love2.mp3 для кнопки ДА! -->
+                    <audio id="yesAudio" src="love2.mp3" preload="auto"></audio>
+                    <div class="music-controls">
+                        <button class="play-btn" id="playButton">
+                            <i class="fas fa-play" id="playIcon"></i>
+                        </button>
+                    </div>
+                    <p class="music-caption">Романтическая мелодия для нас двоих, включи её и листай вверх</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p class="footer-message">С любовью, навсегда твой Данил 💝</p>
+                <p>&copy; 2026 Моя Валентинка</p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        function scrollToBottom() {
+            // Звук love2.mp3 при нажатии ДА!
+            const yesAudio = document.getElementById('yesAudio');
+            yesAudio.currentTime = 0; // Сброс до начала
+            yesAudio.play().catch(e => console.log('Автопроигрывание заблокировано'));
+            
+            // Скролл до низа
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                left: 0,
+                behavior: 'smooth'
+            });
+            setTimeout(() => {
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 100);
+        }
+
+        function createHeartsBatch() {
+            const container = document.getElementById('heartsdiv');
+            const symbols = ['💖', '💕', '💗', '💓', '💞', '❤️'];
+            const batchSize = 4;
+            
+            for (let i = 0; i < batchSize; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode) heart.remove();
+                }, 30000);
+            }
+        }
+
+        function startHearts() {
+            createHeartsBatch();
+            setInterval(createHeartsBatch, 1500);
+        }
+
+        let isPlaying = false;
+        function toggleMusic() {
+            const audio = document.getElementById('myAudio');
+            const btn = document.getElementById('playButton');
+            const icon = document.getElementById('playIcon');
+            
+            if (isPlaying) {
+                audio.pause(); 
+                icon.className = 'fas fa-play'; 
+                btn.classList.remove('active');
+                isPlaying = false;
+            } else {
+                audio.play(); 
+                icon.className = 'fas fa-pause'; 
+                btn.classList.add('active');
+                isPlaying = true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // КНОПКА ДА! - звук + скролл
+            document.getElementById('scrollBtn').addEventListener('click', scrollToBottom);
+            document.getElementById('scrollBtn').addEventListener('touchstart', scrollToBottom);
+            
+            // Галерея
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                });
+                item.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // Музыка love1.mp3
+            document.getElementById('playButton').addEventListener('click', toggleMusic);
+            document.getElementById('playButton').addEventListener('touchstart', toggleMusic);
+            
+            startHearts();
+        });
+    </script>
+</body>
+</html>
